@@ -1,0 +1,95 @@
+* {
+    text-align: start;
+}
+
+.App-header {
+    background-color: #61dafb;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: calc(10px + 2vmin);
+    color: white;
+}
+
+.App-link {
+    color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.route-names {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.route-name {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.25rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: darkmagenta;
+    font-size: 1.2rem;
+}
+
+.routes {
+    background-color: silver;
+    padding: 1rem 2rem;
+    border-radius: 0.25rem;
+    min-height: 20rem;
+    max-height: 25rem;
+    overflow-x: auto;
+}
+
+.totalTimeWrapper {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.totalTimeWrapper p {
+    display: flex;
+    align-items: center;
+}
+
+.totalTime {
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    background-color: darkmagenta;
+    border-radius: 0.25rem;
+    margin-left: 1rem;
+}
+
+.trip {
+    border-bottom: 1px solid black;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+}
+
+.trip p {
+    margin-bottom: 0.5rem;
+}
+
+.primary {
+  background: #e2001a !important;
+}
+
+.form {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

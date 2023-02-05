@@ -1,0 +1,14 @@
+.parisMap {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.searchPosition {
+  z-index: 2;
+}
+
+.main{
+  height: 80vh;
+  padding: 2rem 0 !important;
+}

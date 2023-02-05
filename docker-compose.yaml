@@ -1,0 +1,98 @@
+version: "3.1"
+
+services:
+  client:
+    build:
+      context: client
+      dockerfile: Dockerfile
+    depends_on:
+      - csa-microservice
+      - raptor-microservice
+    expose:
+      - "80"
+    ports:
+      - "8080:80"
+    networks:
+      - frontend
+
+  csa-microservice:
+    build:
+      context: csa-microservice
+      dockerfile: Dockerfile
+    depends_on:
+      - database-microservice
+    ports:
+      - "8000:8000"
+    networks:
+      - frontend
+      - backend
+
+  raptor-microservice:
+    build:
+      context: raptor-microservice
+      dockerfile: Dockerfile
+    depends_on:
+      - database-microservice
+    ports:
+      - "8000:8000"
+    networks:
+      - frontend
+      - backend
+
+  database-microservice:
+    build:
+      context: database-microservice
+      dockerfile: Dockerfile
+    depends_on:
+      - db-lyon
+    ports:
+      - "8000:8000"
+    networks:
+      - frontend
+      - backend
+
+  db-lyon:
+    restart: always
+    image: postgres:latest
+    container_name: postgres-lyon
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - backend
+      - database
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin #you can change this
+    depends_on:
+      - db-lyon
+    ports:
+      - "5052:80"
+    networks:
+      - database
+    environment:
+      PGADMIN_DEFAULT_EMAIL: pgadmin4@pgadmin.org
+      PGADMIN_DEFAULT_PASSWORD: root
+    restart: always
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
+  database:
+    driver: bridge
+
+volumes:
+  postgres_data:
+  postgres_data_paris:
+
+
