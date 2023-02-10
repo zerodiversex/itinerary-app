@@ -22,7 +22,7 @@ services:
     depends_on:
       - database-microservice
     ports:
-      - "8000:8000"
+      - "8082:8000"
     networks:
       - frontend
       - backend
@@ -34,7 +34,7 @@ services:
     depends_on:
       - database-microservice
     ports:
-      - "8000:8000"
+      - "8082:8000"
     networks:
       - frontend
       - backend
@@ -68,6 +68,25 @@ services:
     networks:
       - backend
       - database
+  
+  db-lyon-raptor:
+    restart: always
+    image: postgres:latest
+    container_name: postgres-lyon-raptor
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASS=postgres
+      - POSTGRES_DB=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_PORT=5432
+    ports:
+      - "5433:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    networks:
+      - backend
+      - database
+
 
   pgadmin:
     image: dpage/pgadmin4
