@@ -1,19 +1,8 @@
 import React, { useEffect, useState } from "react";
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Polyline,
-} from "react-leaflet";
-import markerIconPng from "leaflet/dist/images/marker-icon.png";
-
-import { Icon } from "leaflet";
 import "semantic-ui-css/semantic.min.css";
 import { createMedia } from "@artsy/fresnel";
 
 import "./styles.css";
-import "leaflet/dist/leaflet.css";
 
 import {
   Container,
