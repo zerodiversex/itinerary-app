@@ -2,7 +2,7 @@ from route_search_engine.models import Stop, Trip, StopTime, Connection, FootPat
 from route_search_engine.outils import seconds_to_hhmmss
 
 
-def connection_scan(start_station, end_station, departure_time=None, arrival_time=None):
+def raptor(start_station, end_station, departure_time=None, arrival_time=None):
     stops = {stop[0]: float('inf') for stop in Stop.objects.all().values_list('stop_id')}
     trips = {trip[0]: None for trip in Trip.objects.all().values_list('trip_id')}
     journey = {stop[0]: (None, None, None) for stop in Stop.objects.all().values_list('stop_id')}
