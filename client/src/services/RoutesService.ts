@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = `http://localhost:8000/api/v1/trip/`;
+const BASE_URL = `http://localhost:8080/api/v1/trip/`;
 
 export const searchRoutesDepature = async (from: string, to: string, dep: string) => {
   return await axios.get(
