@@ -157,6 +157,12 @@ class Command(BaseCommand):
                             'transfer_arr_stop': to_stop_id,
                             'transfer_duration': transfer_time,
                         })
+                else:
+                        rows.append({
+                            'transfer_dep_stop': from_stop_id,
+                            'transfer_arr_stop': to_stop_id,
+                            'transfer_duration': 0,
+                        })
 
         with open('footpaths.csv', 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=headers)
