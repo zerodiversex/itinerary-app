@@ -1,5 +1,5 @@
-from route_search_engine.models import Stop, Trip, StopTime, Connection, FootPath
-from route_search_engine.outils import seconds_to_hhmmss
+from core.models import Stop, Trip, StopTime, Connection, FootPath
+from core.outils import seconds_to_hhmmss
 
 
 def connection_scan(start_station, end_station, departure_time=None, arrival_time=None):

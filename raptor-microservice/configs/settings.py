@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django_filters',
     'rest_framework',
-    'route_search_engine',
+    'raptor_microservice',
     'corsheaders'
 ]
 

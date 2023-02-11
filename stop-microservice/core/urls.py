@@ -1,9 +1,8 @@
 from django.urls import path
-from .views import JourneyView, SearchView
+from .views import StopView
 
-app_name = "route_search_engine"
+app_name = "stops_microservice"
 
 urlpatterns = [
-    path('trip/', JourneyView.as_view(), name='journey'),
-    path('search/', SearchView.as_view(), name='search')
+    path('stops/', StopView.as_view(), name='stops'),
 ]

@@ -19,5 +19,5 @@ from django.urls import include
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api/v1/', include('route_search_engine.urls', namespace='route_search_engine')),
+    path('api/v1/', include('core.urls', namespace='core')),
 ]

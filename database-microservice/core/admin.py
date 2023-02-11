@@ -1,6 +1,6 @@
 from django.contrib import admin
-from route_search_engine.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
-from route_search_engine.outils import seconds_to_hhmmss
+from core.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
+from core.outils import seconds_to_hhmmss
 
 class StopAdmin(admin.ModelAdmin):
     list_display = ('stop_id', 'stop_name', 'stop_desc')

@@ -1,6 +1,6 @@
-from route_search_engine.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
+from core.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
 from django.core.management.base import BaseCommand
-from route_search_engine.outils import time_to_seconds, KeyList, seconds_to_hhmmss, haversine_distance
+from core.outils import time_to_seconds, KeyList, seconds_to_hhmmss, haversine_distance
 import requests
 import csv
 import math

@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta
-from route_search_engine.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
+from core.models import Stop, Route, Trip, Transfer, StopTime, Connection, FootPath
 from math import sin, cos, sqrt, asin, radians, ceil
 
 

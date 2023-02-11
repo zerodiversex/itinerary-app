@@ -1,9 +1,9 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from route_search_engine.raptor import connection_scan
-from route_search_engine.outils import time_to_seconds
+from core.raptor import connection_scan
+from core.outils import time_to_seconds
 from datetime import datetime
-from route_search_engine.models import Stop
+from core.models import Stop
 
 class JourneyView(APIView):
     def get(self, request):
