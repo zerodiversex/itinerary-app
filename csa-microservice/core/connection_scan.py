@@ -1,6 +1,25 @@
 from core.models import Stop, Trip, StopTime, Connection, FootPath
 from core.outils import seconds_to_hhmmss
 
+def filter_connections(sorted_connections, departure_time):
+    # Binary search
+    high = len(sorted_connections)-1
+    low = 0
+    while low <= high:
+
+        mid = low + (high - low)//2
+
+        if sorted_connections[mid][3] == departure_time:
+            return sorted_connections[mid: len(sorted_connections) + 1]
+
+        elif sorted_connections[mid][3] < departure_time:
+            low = mid + 1
+
+        else:
+            high = mid - 1
+
+    return sorted_connections
+
 
 def connection_scan(start_station, end_station, departure_time=None, arrival_time=None):
     stops = {stop[0]: float('inf') for stop in Stop.objects.all().values_list('stop_id')}
@@ -11,11 +30,10 @@ def connection_scan(start_station, end_station, departure_time=None, arrival_tim
 
     for footpath in FootPath.objects.filter(transfer_dep_stop__stop_id=start_station):
         stops[footpath.transfer_arr_stop.stop_id] = departure_time + footpath.transfer_duration
-    
-    connections = Connection.objects.filter(
-            dep_time__gte=departure_time).order_by('dep_time').values_list('dep_stop__stop_id', 'arr_stop__stop_id', 'dep_time', 'arr_time', 'trip_id', 'mode_transport', 'route__route_short_name')
 
-    print(connections)
+    connections = Connection.objects.all().order_by('dep_time').values_list('dep_stop__stop_id', 'arr_stop__stop_id', 'dep_time', 'arr_time', 'trip_id', 'mode_transport', 'route__route_short_name')
+
+    connections = filter_connections(connections, departure_time)
 
     nbr_connection = 1
     for cdep_stop, carr_stop, cdep_time, carr_time, ctrip_id, cmode_transport, route in connections:

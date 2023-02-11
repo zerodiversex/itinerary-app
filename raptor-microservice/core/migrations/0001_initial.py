@@ -38,7 +38,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('trip_id', models.CharField(max_length=255, primary_key=True, serialize=False)),
                 ('trip_headsign', models.CharField(blank=True, max_length=255, null=True)),
-                ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='route_search_engine.route')),
+                ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.route')),
             ],
         ),
         migrations.CreateModel(
@@ -47,8 +47,8 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('transfer_type', models.IntegerField()),
                 ('min_transfer_time', models.IntegerField(blank=True, null=True)),
-                ('from_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='from_stop', to='route_search_engine.stop')),
-                ('to_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='to_stop', to='route_search_engine.stop')),
+                ('from_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='from_stop', to='core.stop')),
+                ('to_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='to_stop', to='core.stop')),
             ],
         ),
         migrations.CreateModel(
@@ -56,8 +56,8 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('transfer_duration', models.IntegerField(blank=True, null=True)),
-                ('transfer_arr_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transfer_arr_stop', to='route_search_engine.stop')),
-                ('transfer_dep_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transfer_dep_stop', to='route_search_engine.stop')),
+                ('transfer_arr_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transfer_arr_stop', to='core.stop')),
+                ('transfer_dep_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='transfer_dep_stop', to='core.stop')),
             ],
         ),
         migrations.CreateModel(
@@ -67,10 +67,10 @@ class Migration(migrations.Migration):
                 ('dep_time', models.IntegerField()),
                 ('arr_time', models.IntegerField()),
                 ('mode_transport', models.CharField(blank=True, max_length=255, null=True)),
-                ('arr_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='arr_stop', to='route_search_engine.stop')),
-                ('dep_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dep_stop', to='route_search_engine.stop')),
-                ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='route_search_engine.route')),
-                ('trip', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='route_search_engine.trip')),
+                ('arr_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='arr_stop', to='core.stop')),
+                ('dep_stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='dep_stop', to='core.stop')),
+                ('route', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.route')),
+                ('trip', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.trip')),
             ],
         ),
         migrations.CreateModel(
@@ -80,8 +80,8 @@ class Migration(migrations.Migration):
                 ('arrival_time', models.IntegerField()),
                 ('departure_time', models.IntegerField()),
                 ('stop_sequence', models.IntegerField()),
-                ('stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='route_search_engine.stop')),
-                ('trip', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='route_search_engine.trip')),
+                ('stop', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.stop')),
+                ('trip', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='core.trip')),
             ],
             options={
                 'unique_together': {('trip', 'stop_sequence')},
