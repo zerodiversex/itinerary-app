@@ -34,7 +34,7 @@ services:
     depends_on:
       - database-microservice
     ports:
-      - "8082:8000"
+      - "8083:8000"
     networks:
       - frontend
       - backend
@@ -93,7 +93,6 @@ services:
     container_name: pgadmin #you can change this
     depends_on:
       - db-lyon-csa
-      - db-lyon-raptor
     ports:
       - "5052:80"
     networks:

@@ -152,7 +152,13 @@ class Command(BaseCommand):
                 to_stop_id = to_stop[0]
                 to_stop_lat = to_stop[1]
                 to_stop_lon = to_stop[2]
-                if from_stop_id != to_stop_id:
+                if from_stop_id == to_stop_id:
+                    rows.append({
+                        'transfer_dep_stop': from_stop_id,
+                        'transfer_arr_stop': to_stop_id,
+                        'transfer_duration': 0,
+                    })
+                else:
                     transfer_time = haversine_distance(from_stop_lat, from_stop_lon, to_stop_lat, to_stop_lon)
                     if transfer_time <= 5 * 60:
                         rows.append({
@@ -160,12 +166,6 @@ class Command(BaseCommand):
                             'transfer_arr_stop': to_stop_id,
                             'transfer_duration': transfer_time,
                         })
-                else:
-                    rows.append({
-                        'transfer_dep_stop': from_stop_id,
-                        'transfer_arr_stop': to_stop_id,
-                        'transfer_duration': Transfer.objects.get(from_stop_id=from_stop_id, to_stop_id=to_stop_id).min_transfer_time,
-                    })
 
         with open('footpaths.csv', 'w', newline='') as f:
             writer = csv.DictWriter(f, fieldnames=headers)

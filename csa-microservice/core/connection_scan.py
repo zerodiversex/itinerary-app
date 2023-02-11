@@ -11,17 +11,19 @@ def connection_scan(start_station, end_station, departure_time=None, arrival_tim
 
     for footpath in FootPath.objects.filter(transfer_dep_stop__stop_id=start_station):
         stops[footpath.transfer_arr_stop.stop_id] = departure_time + footpath.transfer_duration
+    
+    connections = Connection.objects.filter(
+            dep_time__gte=departure_time).order_by('dep_time').values_list('dep_stop__stop_id', 'arr_stop__stop_id', 'dep_time', 'arr_time', 'trip_id', 'mode_transport', 'route__route_short_name')
+
+    print(connections)
 
     nbr_connection = 1
-    for cdep_stop, cdep_time, carr_stop, carr_time, ctrip_id, cmode_transport, route in Connection.objects.filter(
-            dep_time__gte=departure_time).order_by('dep_time').values_list('dep_stop__stop_id', 'dep_time', 'arr_stop__stop_id', 'arr_time', 'trip_id', 'mode_transport', 'route__route_short_name'):
+    for cdep_stop, carr_stop, cdep_time, carr_time, ctrip_id, cmode_transport, route in connections:
         if cdep_time >= stops[end_station]:
             break
         if trips[ctrip_id] != None or stops[cdep_stop] <= cdep_time:
             if trips[ctrip_id] == None:
-                trips[ctrip_id] = \
-                (cdep_stop, cdep_time, carr_stop, carr_time, ctrip_id,
-                cmode_transport, route)
+                trips[ctrip_id] = (cdep_stop, cdep_time, carr_stop, carr_time, ctrip_id, cmode_transport, route)
             if carr_time < stops[carr_stop]:
                 for transfer_dep_stop, transfer_arr_stop, transfer_duration in FootPath.objects.filter(
                         transfer_dep_stop__stop_id=carr_stop).values_list('transfer_dep_stop__stop_id',
