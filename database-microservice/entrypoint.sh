@@ -17,7 +17,7 @@ done
 echo -e "### Préparation du conteneur ###"
 python manage.py makemigrations
 python manage.py migrate
-#python manage.py import_data_lyon
+python manage.py import_data_lyon
 
 echo -e "### Démarrage du conteneur ###"
 exec "${launch[@]}"

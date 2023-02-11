@@ -44,14 +44,14 @@ services:
       context: database-microservice
       dockerfile: Dockerfile
     depends_on:
-      - db-lyon
+      - db-lyon-csa
     ports:
       - "8000:8000"
     networks:
       - frontend
       - backend
 
-  db-lyon:
+  db-lyon-csa:
     restart: always
     image: postgres:latest
     container_name: postgres-lyon
@@ -92,7 +92,8 @@ services:
     image: dpage/pgadmin4
     container_name: pgadmin #you can change this
     depends_on:
-      - db-lyon
+      - db-lyon-csa
+      - db-lyon-raptor
     ports:
       - "5052:80"
     networks:
