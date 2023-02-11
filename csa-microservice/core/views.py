@@ -3,7 +3,6 @@ from rest_framework.response import Response
 from core.connection_scan import connection_scan
 from core.outils import time_to_seconds
 from datetime import datetime
-from core.models import Stop
 
 class JourneyView(APIView):
     def get(self, request):
@@ -22,15 +21,4 @@ class JourneyView(APIView):
             journeys = connection_scan(start_station, end_station, departure_time=departure_time, arrival_time=arrival_time_seconds)
 
         return Response(journeys)
-
-class SearchView(APIView):
-    def get(self, request):
-        stops = []
-        search_field = self.request.query_params.get('field')
-        stops_query = Stop.objects.filter(stop_name__icontains=search_field)
-        for stop in stops_query:
-            stops.append({'stop_id': stop.stop_id, 'stop_name': stop.stop_name, 'stop_desc': stop.stop_desc})
-
-        return Response(stops)
-
 
