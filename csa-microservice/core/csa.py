@@ -21,7 +21,7 @@ def filter_connections(sorted_connections, departure_time):
     return sorted_connections
 
 
-def connection_scan(start_station, end_station, departure_time=None, arrival_time=None):
+def csa(start_station, end_station, departure_time=None, arrival_time=None):
     stops = {stop[0]: float('inf') for stop in Stop.objects.all().values_list('stop_id')}
     trips = {trip[0]: None for trip in Trip.objects.all().values_list('trip_id')}
     journey = {stop[0]: (None, None, None) for stop in Stop.objects.all().values_list('stop_id')}
@@ -35,7 +35,6 @@ def connection_scan(start_station, end_station, departure_time=None, arrival_tim
 
     connections = filter_connections(connections, departure_time)
 
-    nbr_connection = 1
     for cdep_stop, carr_stop, cdep_time, carr_time, ctrip_id, cmode_transport, route in connections:
         if cdep_time >= stops[end_station]:
             break
@@ -55,7 +54,6 @@ def connection_scan(start_station, end_station, departure_time=None, arrival_tim
                             cmode_transport, route),
                             (transfer_dep_stop, transfer_arr_stop, transfer_duration))
 
-        nbr_connection += 1
     if arrival_time:
         if stops[end_station] > arrival_time:
             return {'journeys': [{}]}
